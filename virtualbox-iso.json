@@ -1,0 +1,29 @@
+{
+    "variables": {
+        "ssh_name": "vagrant",
+        "ssh_pass": "vagrant"
+    },
+
+    "builders": [{
+        "type": "virtualbox-iso",
+        "communicator": "ssh",
+        "guest_os_type": "RedHat_64",
+        "iso_urls": [
+            "file://isos/CentOS-7-x86_64-Minimal-1804.iso",
+            "http://mirror.airenetworks.es/CentOS/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso",
+            "http://repos.hi.inet/redhat/rhel7.6s-x86_64/iso/rhel-server-7.6-x86_64-dvd.iso",
+            "file://isos/rhel-server-7.6-x86_64-dvd.iso"
+        ],
+        "iso_checksum": "fabdc67ff3a1674a489953effa285dfd",
+        "iso_checksum_type": "md5",
+        "ssh_timeout": "10m",
+        "ssh_username": "{{user `ssh_name`}}",
+        "ssh_password": "{{user `ssh_pass`}}",
+        "shutdown_timeout": "15m",
+        "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+        "boot_command": [
+            "<tab> text append net.ifnames=0 biosdevname=0 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+        ],
+        "http_directory": "http"
+    }]
+}
