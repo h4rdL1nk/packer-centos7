@@ -1,0 +1,4 @@
+- src: https://github.com/h4rdL1nk/ansible-role-linux-base.git
+  scm: git
+  version: master
+  name: ansible-role-linux-base

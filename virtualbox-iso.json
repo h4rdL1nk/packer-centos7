@@ -3,6 +3,13 @@
         "ssh_name": "vagrant",
         "ssh_pass": "vagrant"
     },
+    "provisioners": [
+        {
+          "type": "ansible",
+          "user": "{{user `ssh_name`}}",
+          "playbook_file": "./play.yml"
+        }
+    ],
     "builders": [{
         "type": "virtualbox-iso",
         "communicator": "ssh",
